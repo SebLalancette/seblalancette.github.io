@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style type="text/css">
+    label {
+      display: inline-block;
+      width: 160px;
+    }
+
+    input[type="submit"] {
+      margin: 10px 0 0 0;
+    }
+
+    portal, iframe {
+      border: 1px solid black;
+      width: 750px;
+      height: 750px;
+    }
+    </style>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', e => {
+      const state = {
+        buttonCallback: () => {},
+        predecessor: undefined
+      };
+      const title = document.getElementById('context-title');
+      const button = document.getElementById('only-button');
+
+      button.addEventListener('click', () => {
+        state.buttonCallback();
+      });
+
+      const updatePredecessor = (p) => {
+        state.predecessor = p;
+        if (state.predecessor) {
+          button.innerText = "Activate Predecessor";
+          state.buttonCallback = () => state.predecessor.activate();
+        }
+      };
+
+      window.addEventListener('portalactivate', e => {
+        title.innerText = "Activated Portal!";
+        updatePredecessor(e.adoptPredecessor());
+      });
+    });
+  </script>
+  </head>
+  <body>
+    <h2 id="context-title">Everything quiet so far...</h2>
+    <button id="only-button">Do nothing!</button>
+  </body>
+</html>

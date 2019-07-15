@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <style type="text/css">
+    label {
+      display: inline-block;
+      width: 160px;
+    }
+
+    input[type="submit"] {
+      margin: 10px 0 0 0;
+    }
+
+    portal, iframe {
+      border: 1px solid black;
+      width: 750px;
+      height: 750px;
+    }
+    </style>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', e => {
+      const portal = document.getElementById('only-portal');
+
+      portal.addEventListener('click', e => {
+        portal.activate()
+          .then(() => {
+            history.pushState(null, null, document.location);
+            alert("portal activated!");
+            });
+      });
+
+      if (!HTMLPortalElement) {
+        document.getElementById('main-heading').innerText = "Portals are not supported on this browser.";
+      }
+    });
+  </script>
+  </head>
+  <body>
+    <h2 id="main-heading">Here's a portal!</h2>
+    <portal id="only-portal" src="../portal-2.html"></portal>
+  </body>
+</html>
