@@ -19,24 +19,32 @@
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', e => {
-      const portal = document.getElementById('only-portal');
+      if ('HTMLPortalElement' in window) {
+        const h2 = document.createElement('h2');
+        h2.innerText = "Portals are not supported on this browser.";
 
-      portal.addEventListener('click', e => {
-        portal.activate()
-          .then(() => {
-            history.pushState(null, null, document.location);
-            alert("portal activated!");
-            });
-      });
+        const portal = document.createElement('portal');
+        portal.src = "../portal-2.html";
 
-      if (!HTMLPortalElement) {
-        document.getElementById('main-heading').innerText = "Portals are not supported on this browser.";
+        portal.addEventListener('click', e => {
+          portal.activate()
+            .then(() => {
+              history.pushState(null, null, document.location);
+              alert("portal activated!");
+              });
+        });
+
+        document.body.appendChild(h2);
+        document.body.appendChild(portal);
+
+      } else {
+        const h2 = document.createElement('h2');
+        h2.innerText = "Portals are not supported on this browser.";
+        document.body.appendChild(h2);
       }
     });
   </script>
   </head>
   <body>
-    <h2 id="main-heading">Here's a portal!</h2>
-    <portal id="only-portal" src="../portal-2.html"></portal>
   </body>
 </html>
