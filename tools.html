@@ -3,7 +3,7 @@
     <style type="text/css">
     label {
       display: inline-block;
-      width: 160px;
+      width: 250px;
     }
 
     input[type="submit"] {
@@ -19,6 +19,10 @@
     <div>
       <label> Open Long SMS Link:</label>
       <a href="sms:?&body=Blueberry%20Banana%20Bread%20%0ARecipe%20courtesy%20of%20Giada%20De%20Laurentiis%20Recipe%20courtesy%20of%20Giada%20De%20Laurentiis%20%0Ahttps%3A%2F%2Fwww.foodnetwork.com%2Frecipes%2Fgiada-de-laurentiis%2Fblueberry-banana-bread-recipe-2127411%20%0A%0AINGREDIENTS%3A%0AButter%2C%20for%20greasing%20the%20loaf%20pan%C2%A0%0A1%201%2F2%20cups%20all-purpose%20flour%2C%20plus%20extra%20for%20dusting%20the%20loaf%20pan%C2%A0%0A">Long SMS Link</a>
+    </div>
+    <div>
+      <label>Open SMS Link in new Tab:</label>
+      <a id="open-link" href="#">New Tab Link</a>
     </div>
     <div>
         <label>Enter image data URI:</label>
@@ -39,6 +43,12 @@
         var dataUri = inputEle.value || '';
         imageEle.src = dataUri;
       });
+
+      document.getElementById('open-link')
+              .addEventListener('click',
+        function(e) {
+          window.open('sms:?&body=Hello%20World', '_blank');
+        });
     </script>
   </body>
 </html>
