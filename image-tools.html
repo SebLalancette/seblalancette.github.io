@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <style type="text/css">
+    label {
+      display: inline-block;
+      width: 250px;
+    }
+
+    input[type="submit"] {
+      margin: 10px 0 0 0;
+    }
+
+    iframe {
+      border: 1px solid black;
+    }
+    </style>
+  </head>
+  <body>
+    <label>Enter image data URI:</label>
+    <br />
+    <input id="data-uri-input" type="text" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+    <button id="update-btn" type="button">Update</button>
+    <div id="image-container">
+    </div>
+    <script type="text/javascript">
+      var inputEle = document.getElementById('data-uri-input');
+      var updateBtn = document.getElementById('update-btn');
+
+      var imageContainer = document.getElementById('image-container');
+      var imageEle = document.createElement('img');
+      imageContainer.appendChild(imageEle);
+
+      updateBtn.addEventListener('click', function(e) {
+        var dataUri = inputEle.value || '';
+        imageEle.src = dataUri;
+      });
+    </script>
+  </body>
+</html>
